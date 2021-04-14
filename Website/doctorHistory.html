@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title id="home">BPHC Hospital - Doctor Patient History</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="effects.css">
+</head>
+
+
+<body>
+<div id="page">
+<h1 id = "logo"> BPHC Hospital </h1>
+
+
+
+<<p style="color:#f5deb3;font-family:Brush Script MT">
+	....delivering excellence since 1990
+	</p>
+	</div>
+	<br><br>
+	
+	<h1 id="entry_text">Your Patient History</h1>
+	
+	<div class="button_container">
+		<button type="menu" style="height: 50px; width: 20%; font-size: 25px;">Sort by recent</button><br>
+		<input type="text" placeholder="Search patient id" name="id_search">
+		<button type="menu" style="width:20%; padding:10px; cursor:pointer;"><i class="fa fa-search"></i></button>
+	</div>
+
+	<div class="detail_container" style="text-align: left;">
+		<!--Add a for loop here and sorting and searching options-->
+		<div class="patient_list_container">
+			<div class="patient_text" style="font-size: 24px; text-align: center;">Patient name:&emsp;{patient_name}</div>
+			<div class="patient_text">Patient ID:&emsp;{patient_id}</div>
+			<div class="patient_text">Complaint:&emsp;{complaint}</div>
+			<div class="patient_text">Diagnosis:&emsp;{Diagnosis}</div>
+			<!--Another for loop for tests-->
+			<div class="patient_text"style="font-size: 20px; text-align: center;">Tests taken:</div>
+			<div class="test_list_container">
+				<table>
+				<tr>
+					<th>Test ID</th>
+					<th>Test Name</th>
+					<th>Test Details</th>
+				</tr>
+				<tr>
+					<td>{ID here}</td>
+					<td>{Name here}</td>
+					<td>This is the details of the test provided. etc etc pass or fail, total results etc aduhiawiuhad auyduaiwdyiuawyd auedeyaiuwdyhauid</td>
+				</tr>
+				</table>
+			</div>
+			<div class="patient_text" style="font-size: 25px; text-align: center; color: darkred">Cost of treatment:&emsp;{cost}</div>
+		</div>
+
+		<div class="patient_list_container">
+			<div class="patient_text" style="font-size: 24px; text-align: center;">Patient name:&emsp;{patient_name}</div>
+			<div class="patient_text">Patient ID:&emsp;{patient_id}</div>
+			<div class="patient_text">Complaint:&emsp;{complaint}</div>
+			<div class="patient_text">Diagnosis:&emsp;{Diagnosis}</div>
+			<!--Another for loop for tests-->
+			<div class="patient_text"style="font-size: 20px; text-align: center;">Tests taken:</div>
+			<div class="test_list_container">
+				<table>
+				<tr>
+					<th>Test ID</th>
+					<th>Test Name</th>
+					<th>Test Details</th>
+				</tr>
+				<tr>
+					<td>{ID here}</td>
+					<td>{Name here}</td>
+					<td>This is the details of the test provided. etc etc pass or fail, total results etc aduhiawiuhad auyduaiwdyiuawyd auedeyaiuwdyhauid</td>
+				</tr>
+				</table>
+			</div>
+			<div class="patient_text" style="font-size: 25px; text-align: center; color: darkred">Cost of treatment:&emsp;{cost}</div>
+		</div>
+
+	</div>
+	
+	<div class="button_container">
+		<button type="menu" onclick="location.href='doctor.html'">Back</button>
+	</div>
+
+<div id = "acknowledge">ⒸBPHC hospital 2021</div>
+</body>
+</html>
