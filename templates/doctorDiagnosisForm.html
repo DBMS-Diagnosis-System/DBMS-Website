@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title id="home">BPHC Hospital - Diagnosis</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../static/effects3.css">
+</head>
+
+
+<body>
+<div id="page">
+<h1 id = "logo"> BPHC Hospital </h1>
+
+
+
+<p style="color:#f5deb3;font-family:Brush Script MT">
+....delivering excellence since 1990
+</p>
+</div>
+<br><br>
+
+<form method = "post">
+	<fieldset id = "newpa" style = "background: rgba(100, 199, 199, 0.5);">
+		<legend style = "font-style: Arial; letter-spacing:0em;color : #ede4c3;font-size:150%">Diagnose patient</legend><br><br><br>
+		<label for="patientid">Enter patient id:</label><br><br>
+ 	 <input type="text" id="patientid" name="patientid" required pattern="^[\d]+$"><br><br>
+	 <input type="submit" name="submitold"
+	 value="Diagnose" />
+</fieldset>
+</form>
+
+<div class="detail_container" style="text-align: left;">
+	<div class="patient_list_container">
+
+		<div class="patient_text" style="font-size: 24px; text-align: center;">Diagnosis:</div>
+
+		<div class="button_container">
+			<textarea placeholder="Diagnosis" name="diagnosis"></textarea>
+		</div>
+
+		<br>
+		<div class="patient_text"style="font-size: 20px; text-align: center;">Current Tests:</div><br>
+		<div class="test_list_container">
+			<table>
+			<tr>
+				<th>Test ID</th>
+				<th>Test Name</th>
+				<th>Test Details</th>
+			</tr>
+			<tr>
+				<td>{ID here}</td>
+				<td>{Name here}</td>
+				<td>This is the details of the test provided. etc etc pass or fail, total results etc aduhiawiuhad auyduaiwdyiuawyd auedeyaiuwdyhauid</td>
+			</tr>
+			</table>
+		</div>
+
+		<br>
+		<div class="patient_text"style="font-size: 20px; text-align: center;">Add Tests</div>
+		<div class="button_container">
+			<input type="text" placeholder="Search test.." name="test_search">
+			<button type="menu" style="width:20%; padding:10px; cursor:pointer;"><i class="fa fa-search"></i></button>
+		</div>
+		<div class="test_list_container">
+			<table>
+			<tr>
+				<th>Test ID</th>
+				<th>Test Name</th>
+				<th>Test Details</th>
+			</tr>
+			
+			<tr>
+				<td>{ID here}</td>
+				<td>{Name here}</td>
+				<td>This is the details of the test provided. etc etc pass or fail, total results etc aduhiawiuhad auyduaiwdyiuawyd auedeyaiuwdyhauid</td>
+				<!--<td><button type="menu" style="width: 100px; font-size: 20px;">Add</button></td>-->
+			</tr>
+			</table>
+		</div>
+
+	</div>
+
+	<div class="button_container">
+		<button type="menu">Calculate total cost</button>
+	</div>
+
+	<!--Final cost generates here-->
+	<div class="patient_text"style="font-size: 20px; text-align: center;">Final cost:&emsp;{final_cost}</div>
+	<br><br>
+
+	<div class="button_container">
+		<button type="menu" onclick="location.href='doctormain'">Generate Bill and Exit</button>
+	</div>
+
+</div>
+
+<div class="button_container">
+	<button type="menu" onclick="location.href='doctorPatients'">Back to list</button>
+</div>
+
+<div id = "acknowledge">ⒸBPHC hospital 2021</div>
+</body>
+</html>

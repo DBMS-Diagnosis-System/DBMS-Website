@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title id="home">bphc hospital</title>
+	<link rel="stylesheet" href="../static/effects.css">
+</head>
+
+
+<body>
+<div id="page">
+<h1 id = "logo"> BPHC Hospital </h1>
+
+
+
+<p style="color:#f5deb3;font-family:Brush Script MT">
+....delivering excellence since 1990
+</p>
+</div>
+<br> <br>
+<div>
+<form method = "post"><fieldset style = "background: rgba(100, 199, 199, 0.5);letter-spacing:0em">
+<legend style = "font-style: Arial; letter-spacing:0em;color : #ede4c3;font-size:150%">Submit here if you are an existing patient</legend><br><br><br>
+<label for="patientid">Enter your existing patientid(*):</label><br><br>
+<input type="text" id="patientid" name="patientid" required pattern="^[\d]+$"><br><br>
+<label for="complaint">What is your complaint(*):</label><br><br>
+<textarea name = "comments" rows = 4 cols = 50 required></textarea><br><br>
+Do you wish to be treated by the same doctor as last time?:
+<br />
+<input type="radio" name="samedoctorornot" value="yes"
+checked="checked" /> Absolutely! (This response renders your response to the next question obsolete)
+<input type="radio" name="samedoctorornot" value="no" />
+Maybe not<br><br>
+
+<label for="rating">Select the minimum rating of the doctor you wish to treat you:</label><br><br>
+<select name="rating">
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+</select>
+<br><br>
+<input type="submit" name="submitold"
+value="Get me a doctor!!" />
+</fieldset></form>
+</div>
+
+
+<div id = "acknowledge">ⒸBPHC hospital 2021</div>
+</body>

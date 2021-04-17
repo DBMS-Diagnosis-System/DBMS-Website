@@ -1,0 +1,186 @@
+@font-face {
+  font-family: "indieflower";
+  src:url('../fonts/if.ttf');
+}
+
+body {
+font-size: 100%;
+font-family: "Courier New", Courier, monospace;
+letter-spacing: 0.15em;
+background-image: url("bg1.jpg") ;
+background-attachment: fixed;
+background-size: cover;
+background-color: #0a7a504d;}
+
+#page {
+min-width: 720px;
+margin: 10px auto 10px auto;
+padding: 20px;
+border: 4px double #000;
+background-color: rgba(0,74,150,0.8);}
+
+#logo {
+width: 8em;
+margin: 10px auto 25px auto;
+color: #ffffff;
+font-family: Garamond;}
+
+#entry_text {
+  text-align: center;
+  color: #ffffff;
+  font-family: sans-serif;
+}
+
+ul {
+width: 570px;
+padding: 15px;
+margin: 0px auto 0px auto;
+border-top: 2px solid #000;
+border-bottom: 1px solid #000;
+text-align: center;}
+li {
+display: inline;
+margin: 0px 3px;}
+p {
+text-align: center;
+width: 600px;
+margin: 20px auto 20px auto;
+font-weight: normal;}
+
+a {
+color: #ffffff;
+text-transform: uppercase;
+text-decoration: none;
+padding: 6px 18px 5px 18px;
+transition:0.6s ease 0.05s;}
+a:hover, a.on {
+color: #cc3333;
+background-color: #ffffff;
+border-radius: 2rem;
+}
+
+#content{
+  padding : 5rem;
+  margin : 3rem;
+  border: 5px solid red;
+  text-align: center;
+  border-radius: 3rem;
+  color: #000000;
+  background-color:;
+  text-shadow: 1px 1px 2px;
+  min-width: 70em;
+margin-left: 6em;
+background-color: rgba(255, 255, 255, 0.5);
+}
+
+#acknowledge{
+  margin-top : 5rem;
+  text-align: center;
+}
+
+input[type=text]{
+  padding:10px;
+  font-size:25px;
+  width:30%;
+  text-align: left;
+}
+
+textarea{
+  padding:10px;
+  font-size:25px;
+  width:70%;
+  text-align: left;
+  resize: none;
+  height: 100px;
+}
+
+button[type=menu]{
+  width: 50%;
+  height: 60px;
+  padding: 10px;
+  background: #0d98ba;
+  margin: auto;
+  margin-bottom: 20px;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+  transition: font-size 0.5s;
+}
+
+button[type=menu]:hover{
+  font-size:28px;
+}
+
+.button_container{
+  padding: 10px;
+  text-align: center;
+}
+
+.detail_container{
+  padding: 10px;
+  text-align: center;
+  border: 3px solid blue;
+  background-color: rgba(20,100,150,0.8);
+  border-radius: 3em;
+}
+
+.patient_list_container{
+  padding: 5px;
+  border: 5px solid green;
+  margin-bottom: 20px;
+  background-color: rgba(0, 130, 150, 1.0);
+}
+
+.test_list_container{
+  padding: 10px;
+  border: 2px solid gray;
+  background-color: rgba(100, 100, 100, 0.7);
+}
+
+.patient_text{
+  width:60%;
+  height: 20px;
+  margin: auto;
+  margin-bottom: 5px;
+  text-align: left;
+  font-size: 15px;
+  color: greenyellow;
+  font-family: Arial;
+}
+
+.detail_text{
+  width:70%;
+  height: 70px;
+  padding: 10px;
+  font-size: 30px;
+  color: greenyellow;
+  font-family: sans-serif;
+}
+
+table,th,td{
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  border: 1px solid gray;
+  border-collapse: collapse;
+}
+
+th,td{
+  font-family: sans-serif;
+  color: orange;
+  padding: 15px;
+  width: auto;
+}
+
+.post{
+  border: 5px solid black;
+  min-height: 20rem;
+  margin: 1rem;
+  padding: 2rem;
+  background: rgb(255,255,255,0.8);
+}
+
+.postedby{
+  color: #a00e6e;
+  font-family: indieflower;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title id="home">bphc hospital</title>
+	<link rel="stylesheet" href="../static/effects.css">
+</head>
+
+
+<body>
+<div id="page">
+<h1 id = "logo"> BPHC Hospital </h1>
+
+
+
+<p style="color:#f5deb3;font-family:Brush Script MT">
+....delivering excellence since 1990
+</p>
+</div>
+<br> <br>
+<div><br/><br/><br/>
+<form style = "font-style: Arial; letter-spacing:0em" method="post" action="">
+	 <fieldset id = "newpa" style = "background: rgba(100, 199, 199, 0.5);">
+		 <legend style = "font-style: Arial; letter-spacing:0em;color : #ede4c3;font-size:150%">If you are a new patient, register here:</legend><br><br><br>
+	  <label for="name">Enter your name(*):</label><br><br>
+	  <input type="text" id="name" name="name" size="30" maxlength="100" required pattern = "[a-zA-Z ]+"><br><br>
+
+	  <label for="mob1">Enter you age(*):</label><br><br>
+    <input type="text" id="age" name="age" size="30" maxlength="100" required pattern = "[\d]+"><br><br>
+
+	  <label for="age">Enter you mobile number(*):</label><br><br>
+	  <input type="text" id="mob1" name="mob1" size="30" maxlength="100" required pattern = "[\d]{10}"><br><br>
+
+		<label for="mob2">Enter another mobile number(optional):</label><br><br>
+	  <input type="text" id="mob2" name="mob2" size="30" maxlength="100" pattern="\d{10}"><br><br>
+
+		<label for="complaint">What is your complaint(*):</label><br><br>
+	  <textarea name = "comments" rows = 4 cols = 50 / required></textarea><br><br>
+
+		<label for="rating">Select the minimum rating of the doctor you wish to treat you:</label><br><br>
+		<select name="rating">
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+</select>
+<br><br>
+<input type="submit" name="submitnew"
+value="Get me a doctor!!"/>
+</fieldset>
+</form><br><br>
+</div>
+
+
+<div id = "acknowledge">ⒸBPHC hospital 2021</div>
+</body>

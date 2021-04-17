@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title id="home">bphc hospital</title>
+	<link rel="stylesheet" href="../static/effects.css">
+  <style> @font-face {
+	  font-family: "indieflower";
+	  src:url('../fonts/font.ttf');
+	}</style>
+</head>
+
+
+<body>
+<div id="page">
+<h1 id = "logo"> BPHC Hospital </h1>
+
+
+<p style="color:#f5deb3;font-family:Brush Script MT">
+....delivering excellence since 1990
+</p>
+
+</div>
+<br> <br>
+<p style = "border: 2px solid red;font-family: indieflower;
+padding: 6em;
+color: darkolivegreen;
+background: antiquewhite;
+font-size: 1.5em;
+border-radius: 5em;
+text-shadow: 1px 1px 1px;line-height:2em">Dear <span style = "color:#5511a2">{{ data[4] }}(ID : {{ data[3] }})</span>, please proceed to visit <span style = "color:#5511a2">{{ data[2] }} [id : {{ data[0] }}]</span>
+You checked in at <span style = "color:#a2231c">{{ data[1] }}.<br><br><u><a style = "color:blue" href = "http://127.0.0.1:5000/">Back to main page</a></u></p>
+
+
+<div id = "acknowledge">ⒸBPHC hospital 2021</div>
+</body>
