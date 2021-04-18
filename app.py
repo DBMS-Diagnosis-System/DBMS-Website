@@ -278,6 +278,17 @@ def doctorDiagnosisForm():
 @app.route('/doctorHistory')
 def doctorHistory():
     cur = mysql.connection.cursor()
+    if "loggedin" in session:
+        docid = session["id"]
+        pids = []
+        cur.execute("select pid from patient_visit where docid = (%s)",(docid,))
+        ps = cur.fetchall()
+        for p in ps:
+            pids.append(p[0])
+        pids = tuple(pids)
+        cur.execute("select pat.pname,temp.pid,temp.complaint,temp.diagnosis,t.tid,t.tname,temp.cost_of_treatment from tests t,(select pv.pid,tm_stamp,complaint,diagnosis,cost_of_treatment,tid from patient_visit pv,(select pid, tid from emp_labtech_testlist) elt where pv.pid = elt.pid) temp,patient pat where temp.tid = t.tid and pat.pid = temp.pid and temp.pid in "+str(pids));
+        data = cur.fetchall()
+        return render_template('doctorHistory.html',data = data)
     return render_template('doctorHistory.html')
 
 @app.route('/doctorPatients')
@@ -297,7 +308,7 @@ def logout():
     # Remove session data, this will log the user out
    session.pop('loggedin', None)
    session.pop('id', None)
-   return redirect(url_for('doclogin'))
+   return redirect('doclogin',code = 302)
 
 @app.route('/bill',methods = ['get','post'])
 def bill():
@@ -311,6 +322,11 @@ def bill():
                  query = """select p.pid,p.docid,p.pname,p.complaint,p.diagnosis,p.docnotes,p.tm_stamp,t.tid,t.tname,t.cost,p.mob_num,p.ename,sum.total from (select pid,tm_stamp,pt.tid,tname,cost from patient_tests pt, tests t where t.tid = pt.tid) t,(select pv.pid,pv.docid,p.pname,pv.complaint,pv.diagnosis,pv.docnotes,pv.tm_stamp,pm.mob_num,ename from patient_visit pv ,patient p,patient_mob pm,employee where pv.pid = p.pid and pm.pid = pv.pid and docid = eid) p,(select pid,sum(cost) as total from patient_tests pt,tests t where pt.tid = t.tid group by pid having pid = (%s)) sum where p.pid = t.pid and sum.pid = p.pid and p.pid = (%s)"""
                  cur.execute(query,(pid,pid))
                  data = cur.fetchall()
+                 cur.execute("select pid,sum(cost) as total from patient_tests pt, tests t where pt.tid = t.tid and pid = (%s) order by pid",(pid,))
+                 costdetails = cur.fetchone()
+                 cur.execute("update patient_visit set cost_of_treatment = (%s) where cost_of_treatment is null",(costdetails[1],))
+                 cur.execute("delete from patient_tests where pid = (%s)",(pid,))
+                 cur.execute("delete from emp_doc_patient where pid = (%s) and docid = (%s)",(pid,docid))
                  mysql.connection.commit()
                  cur.close()
                  return render_template("bill.html", data = data)
