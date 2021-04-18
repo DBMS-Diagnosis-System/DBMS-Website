@@ -332,6 +332,13 @@ def logout():
    session.pop('id', None)
    return redirect('doclogin',code = 302)
 
+@app.route('/adminlogout')
+def logout():
+    # Remove session data, this will log the user out
+   session.pop('loggedin', None)
+   session.pop('id', None)
+   return redirect('adminlogin',code = 302)
+
 @app.route('/bill',methods = ['get','post'])
 def bill():
      cur = mysql.connection.cursor()
