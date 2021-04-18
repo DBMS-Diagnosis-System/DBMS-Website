@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title id="home">BPHC Hospital - Doctor Details</title>
+	<link rel="stylesheet" href="../static/effects3.css">
+  <link rel="stylesheet" href="../static/temp.css">
+</head>
+
+
+<body>
+<div id="page">
+<h1 id = "logo"> BPHC Hospital </h1>
+
+
+
+<p style="color:#f5deb3;font-family:Brush Script MT">
+....delivering excellence since 1990
+</p>
+</div>
+<br><br>
+
+<u><h1 id="entry_text" style="color:#f5deb3;font-family:Brush Script MT;font-size:45px;margin-top: 3em;">Your personal details</h1></u>
+
+<div class="detail_container" style = "border-radius:2em; margin:2em 2em 2em 2em">
+  <table>
+  <tr>
+    <th>Name</th><th>ID</th><th>Salary</th><th>Age</th><th>In time</th><th>Outtime</th><th style = "color:red">Rating</th>
+    </tr>
+   <tr><td>{{ data[0] }}</td><td>{{ data[1] }}</td><td>{{ data[2] }}</td><td>{{ data[3] }}</td><td>{{ data[4] }}</td><td>{{ data[5] }}</td><td style = "color:red">{{ data[6] }}</td></tr></table>
+
+</div>
+
+<div class="button_container" style="color:#f5deb3;font-family:Brush Script MT">
+	<button type="menu" onclick="location.href='doctormain'" style="color:#f5deb3;font-family:Brush Script MT;border-radius:3em;" >Back</button>
+</div>
+
+<div id = "acknowledge">ⒸBPHC hospital 2021</div>
+</body>
+</html>
