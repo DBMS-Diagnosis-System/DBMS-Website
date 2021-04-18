@@ -202,6 +202,26 @@ def login():
             msg = 'Incorrect username/password!'
     return render_template('doclogin.html',msg=msg)
 
+@app.route('/adminlogin',methods = ['GET','POST'])
+def login():
+    msg = ""
+    if request.method == "POST":
+        cur = mysql.connection.cursor()
+        userDetails = request.form
+        admid = userDetails['userid']
+        admpass = userDetails['password']
+        checkquery = "select admid,pwd from admin where admid = (%s) and pwd = (%s)"
+        cur.execute(checkquery,(admid,admpass))
+        account = cur.fetchone()
+        if account:
+            mysql.connection.commit()
+            cur.close()
+            msg = ""
+            return redirect('adminmain')
+        else:
+            msg = 'Incorrect username/password!'
+    return render_template('adminlogin.html',msg=msg)
+
 @app.route('/nodoctor.html')
 def nodoctor():
     return render_template('nodoctor.html')
