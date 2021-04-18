@@ -203,7 +203,7 @@ def login():
     return render_template('doclogin.html',msg=msg)
 
 @app.route('/adminlogin',methods = ['GET','POST'])
-def login():
+def adminlogin():
     msg = ""
     if request.method == "POST":
         cur = mysql.connection.cursor()
@@ -214,6 +214,8 @@ def login():
         cur.execute(checkquery,(admid,admpass))
         account = cur.fetchone()
         if account:
+            session['loggedin'] = True
+            session['id'] = admid
             mysql.connection.commit()
             cur.close()
             msg = ""
