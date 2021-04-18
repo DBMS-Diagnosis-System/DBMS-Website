@@ -318,11 +318,45 @@ def bill():
         return redirect('doclogin')
      return render_template('bill.html')
 
+@app.route('/employeeDetails')
+def employeeDetails():
+    cur = mysql.connection.cursor()
+    query = "select * from employee;"
+    cur.execute(query)
+    data = cur.fetchall()
+    return render_template('employeeDetails.html',data = data)
 
+@app.route('/availableDoctors')
+def availableDoctors():
+    cur = mysql.connection.cursor()
+    query = "select eid,ename,(select rating from emp_doc where docid = eid) from employee where eid in (select docid from emp_doc) and in_time<CURRENT_TIME and out_time>CURRENT_TIME;"
+    cur.execute(query)
+    data = cur.fetchall()
+    return render_template('availableDoctors.html',data = data)
 
+@app.route('/allHistory')
+def allHistory():
+    cur = mysql.connection.cursor()
+    query = "select * from patient_visit;"
+    cur.execute(query)
+    data = cur.fetchall()
+    return render_template('allHistory.html',data = data)
 
+@app.route('/adminmain')
+def adminmain():
+    cur = mysql.connection.cursor()
+    query = "select sum(cost_of_treatment) from patient_visit;"
+    cur.execute(query)
+    revenue = cur.fetchall()
+    return render_template('adminmain.html',revenue = revenue)
 
-
+@app.route('/doctorSalary')
+def doctorSalary():
+    cur = mysql.connection.cursor()
+    query = "select eid,ename,esal,timediff(outtime,intime) from employee where eid in (select docid from emp_doc);"
+    cur.execute(query)
+    data = cur.fetchall()
+    return render_template('doctorSalary.html',data = data)
 
 
 
