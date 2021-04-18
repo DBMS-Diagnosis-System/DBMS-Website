@@ -20,19 +20,21 @@
 </div>
 <br><br>
 
-<u><h1 id="entry_text" style="color:#f5deb3;font-family:Brush Script MT;font-size:45px;margin-top: 3em;">Your personal details</h1></u>
+<u><h1 id="entry_text" style="color:#f5deb3;font-family:Brush Script MT;font-size:45px;margin-top: 3em;">Doctor Salaries</h1></u>
 
 <div class="detail_container" style = "border-radius:2em; margin:2em 2em 2em 2em">
+	{% for d in data %}
   <table>
   <tr>
     <th>Name</th><th>ID</th><th>Salary</th><th>No. of Hours</th>
     </tr>
-   <tr><td>{{ data[0] }}</td><td>{{ data[1] }}</td><td>{{ data[2] }}</td><td>{{ data[3] }}</td></tr></table>
-
+   <tr><td>{{ d[0] }}</td><td>{{ d[1] }}</td><td>{{ d[2] }}</td><td>{{ d[3] }}</td></tr></table>
+	 <br><br>
+{% endfor %}
 </div>
 
 <div class="button_container" style="color:#f5deb3;font-family:Brush Script MT">
-	<button type="menu" onclick="location.href='doctormain'" style="color:#f5deb3;font-family:Brush Script MT;border-radius:3em;" >Back</button>
+	<button type="menu" onclick="location.href='adminmain'" style="color:#f5deb3;font-family:Brush Script MT;border-radius:3em;" >Back</button>
 </div>
 
 <div id = "acknowledge">ⒸBPHC hospital 2021</div>

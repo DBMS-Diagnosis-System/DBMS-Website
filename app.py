@@ -361,9 +361,14 @@ def allHistory():
 @app.route('/adminmain')
 def adminmain():
     cur = mysql.connection.cursor()
-    query = "select sum(cost_of_treatment) from patient_visit;"
+    query = "select sum(cost_of_treatment) from patient_visit"
     cur.execute(query)
     revenue = cur.fetchall()
+    d = []
+    for r in revenue:
+        d.append(int(r[0]))
+    d = tuple(d)
+    revenue = d
     return render_template('adminmain.html',revenue = revenue)
 
 @app.route('/doctorSalary')
