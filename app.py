@@ -59,7 +59,7 @@ def newpatient():
         cur.execute("INSERT INTO patient_mob(pid,mob_num) values (%s,%s)",(pid,mobileone))
         if mobiletwo != "":
             cur.execute("INSERT INTO patient_mob(pid,mob_num) values (%s,%s)",(pid,mobiletwo))
-        cur.execute("INSERT INTO patient_tests(pid,tm_stamp) values (%s,%s)",(pid,dt))
+        #cur.execute("INSERT INTO patient_tests(pid,tm_stamp) values (%s,%s)",(pid,dt))
         getdoctor = "select eid from (select * from emp_doc left join employee on eid = docid) as s where s.intime < (%s) and (%s) < s.outtime and rating >= (%s)"
         cur.execute(getdoctor,(time,time,rating))
         doc = cur.fetchall()
@@ -70,7 +70,7 @@ def newpatient():
             dd = cur.fetchone()
             if not dd:
                 cur.execute("INSERT INTO EMP_DOC_PATIENT values (%s,%s,%s)",(d[0],pid,dt))
-                cur.execute("INSERT INTO patient_visit(pid,tm_stamp,complaint,docid) values (%s,%s,%s,%s)",(pid,dt,complaint,d[0]))
+                cur.execute("INSERT INTO patient_visit(pid,tm_stamp,complaint,docid) values (%s,%s,%s,%s)",(pid,0,complaint,d[0]))
                 mysql.connection.commit()
                 cur.close()
                 return redirect("http://127.0.0.1:5000/patiententer", code=302)
@@ -78,7 +78,7 @@ def newpatient():
             doctorData = cur.fetchone()
             if(doctorData):
                 cur.execute("INSERT INTO EMP_DOC_PATIENT values (%s,%s,%s)",(d[0],pid,dt))
-                cur.execute("INSERT INTO patient_visit(pid,tm_stamp,complaint,docid) values (%s,%s,%s,%s)",(pid,dt,complaint,d[0]))
+                cur.execute("INSERT INTO patient_visit(pid,tm_stamp,complaint,docid) values (%s,%s,%s,%s)",(pid,0,complaint,d[0]))
                 mysql.connection.commit()
                 cur.close()
                 return redirect("http://127.0.0.1:5000/patiententer", code=302)
@@ -126,9 +126,9 @@ def oldpatient():
             doctorData = cur.fetchone()
             if not doctorData:
                 return redirect("/nodoctor.html")
-            cur.execute("INSERT INTO patient_tests(pid,tm_stamp) values (%s,%s)",(pid,dt))
+            #cur.execute("INSERT INTO patient_tests(pid,tm_stamp) values (%s,%s)",(pid,dt))
             cur.execute("INSERT INTO EMP_DOC_PATIENT values (%s,%s,%s)",(doc[0],pid,dt))
-            cur.execute("INSERT INTO patient_visit(pid,tm_stamp,complaint,docid) values (%s,%s,%s,%s)",(pid,dt,complaint,doc[0]))
+            cur.execute("INSERT INTO patient_visit(pid,tm_stamp,complaint,docid) values (%s,%s,%s,%s)",(pid,0,complaint,d[0]))
             mysql.connection.commit()
             cur.close()
             return redirect("http://127.0.0.1:5000/patiententer", code=302)
@@ -144,18 +144,18 @@ def oldpatient():
                 cur.execute("select docid from emp_doc_patient where docid = (%s)",(d[0],))
                 dd = cur.fetchone()
                 if not dd:
-                    cur.execute("INSERT INTO patient_tests(pid,tm_stamp) values (%s,%s)",(pid,dt))
+                    #cur.execute("INSERT INTO patient_tests(pid,tm_stamp) values (%s,%s)",(pid,dt))
                     cur.execute("INSERT INTO EMP_DOC_PATIENT values (%s,%s,%s)",(d[0],pid,dt))
-                    cur.execute("INSERT INTO patient_visit(pid,tm_stamp,complaint,docid) values (%s,%s,%s,%s)",(pid,dt,complaint,d[0]))
+                    cur.execute("INSERT INTO patient_visit(pid,complaint,docid) values (%s,%s,%s)",(pid,complaint,d[0]))
                     mysql.connection.commit()
                     cur.close()
                     return redirect("http://127.0.0.1:5000/patiententer", code=302)
                 cur.execute("select count(*)as num_patients,docid from emp_doc_patient group by docid having docid = (%s) and num_patients <3",(d[0],))
                 doctorData = cur.fetchone()
                 if(doctorData):
-                    cur.execute("INSERT INTO patient_tests(pid,tm_stamp) values (%s,%s)",(pid,dt))
+                    #cur.execute("INSERT INTO patient_tests(pid,tm_stamp) values (%s,%s)",(pid,dt))
                     cur.execute("INSERT INTO EMP_DOC_PATIENT values (%s,%s,%s)",(d[0],pid,dt))
-                    cur.execute("INSERT INTO patient_visit(pid,tm_stamp,complaint,docid) values (%s,%s,%s,%s)",(pid,dt,complaint,d[0]))
+                    cur.execute("INSERT INTO patient_visit(pid,complaint,docid) values (%s,%s,%s)",(pid,complaint,d[0]))
                     mysql.connection.commit()
                     cur.close()
                     return redirect("http://127.0.0.1:5000/patiententer", code=302)
@@ -236,13 +236,43 @@ def doctorDetails():
         cur.execute(getdetailsquery,(docid,))
         data = cur.fetchone()
         return render_template("doctorDetails.html",data = data)
-    else:
-        return redirect('doclogin')
 
 
-@app.route('/doctorDiagnosisForm')
+@app.route('/doctorDiagnosisForm',methods = ['GET','POST'])
 def doctorDiagnosisForm():
     cur = mysql.connection.cursor()
+    if "loggedin" in session:
+        print(1)
+        docid = session['id']
+        if request.method == "POST":
+            if "addtest" in request.form:
+                print(12)
+                data = request.form
+                patientid = data['patientid']
+                testids = data['addtest']
+                testids_list = testids.split(',')
+                dt = datetime.datetime.now()
+                for t in testids_list:
+                    cur.execute("insert into patient_tests (pid,tm_stamp,tid) values (%s,%s,%s)",(patientid,dt,t))
+                    cur.execute("insert into emp_labtech_testlist values (%s,%s,%s)",(patientid,t,dt)) # patient_tests is used for the bil.
+                cur.execute("select t.tid,t.tname from patient_tests pt,tests t where t.tid = pt.tid and pid = (%s) and tm_stamp = (%s)",(patientid,dt))
+                data = cur.fetchall()
+                mysql.connection.commit()
+                cur.close()
+                for d  in data:
+                    print(d[0],end = " ")
+                    print(d[1])
+                return render_template('doctorDiagnosisForm.html',data = data)
+            if "pid" in request.form:
+                data = request.form
+                pid = data['pid']
+                diagnosis = data['diagnosis']
+                dnotes = data['dnotes']
+                dt = datetime.datetime.now()
+                cur.execute("update patient_visit set tm_stamp = (%s),diagnosis = (%s),docnotes = (%s) where pid = (%s) and docid = (%s) and tm_stamp = 0",(dt,diagnosis,dnotes,pid,docid))
+                mysql.connection.commit()
+                cur.close()
+                return render_template('doctorDiagnosisForm.html')
     return render_template('doctorDiagnosisForm.html')
 
 @app.route('/doctorHistory')
@@ -258,6 +288,8 @@ def doctorPatients():
         query = "select p.pid,p.pname,pv.complaint from patient p,patient_visit pv where p.pid = pv.pid and p.pid in (select pid from emp_doc_patient where docid = (%s))"
         cur.execute(query,(docid,))
         data = cur.fetchall()
+    else:
+        return redirect('doclogin')
     return render_template('doctorPatients.html',data = data)
 
 @app.route('/doclogout')
@@ -266,6 +298,27 @@ def logout():
    session.pop('loggedin', None)
    session.pop('id', None)
    return redirect(url_for('doclogin'))
+
+@app.route('/bill',methods = ['get','post'])
+def bill():
+     cur = mysql.connection.cursor()
+     if "loggedin" in session:
+         docid = session['id']
+         if request.method == "POST":
+             if "patientbill" in request.form:
+                 userdata = request.form
+                 pid = userdata['patientbill']
+                 query = """select p.pid,p.docid,p.pname,p.complaint,p.diagnosis,p.docnotes,p.tm_stamp,t.tid,t.tname,t.cost,p.mob_num,p.ename,sum.total from (select pid,tm_stamp,pt.tid,tname,cost from patient_tests pt, tests t where t.tid = pt.tid) t,(select pv.pid,pv.docid,p.pname,pv.complaint,pv.diagnosis,pv.docnotes,pv.tm_stamp,pm.mob_num,ename from patient_visit pv ,patient p,patient_mob pm,employee where pv.pid = p.pid and pm.pid = pv.pid and docid = eid) p,(select pid,sum(cost) as total from patient_tests pt,tests t where pt.tid = t.tid group by pid having pid = (%s)) sum where p.pid = t.pid and sum.pid = p.pid and p.pid = (%s)"""
+                 cur.execute(query,(pid,pid))
+                 data = cur.fetchall()
+                 mysql.connection.commit()
+                 cur.close()
+                 return render_template("bill.html", data = data)
+     else:
+        return redirect('doclogin')
+     return render_template('bill.html')
+
+
 
 
 

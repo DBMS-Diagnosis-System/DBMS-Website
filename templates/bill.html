@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title id="home">BPHC Hospital - Diagnosis</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../static/effects3.css">
+</head>
+
+
+<body>
+<div id="page">
+<h1 id = "logo"> BPHC Hospital </h1>
+
+
+
+<p style="color:#f5deb3;font-family:Brush Script MT">
+....delivering excellence since 1990
+</p>
+</div>
+<br><br>
+
+<form method = "post">
+
+</form>
+
+
+
+<form method = "post">
+	<label for="patientid">Enter patient id:</label><br><br>
+ <input type="text" id="patientid" name="patientbill" required pattern="^[\d]+$"><br><br>
+			<input type="submit" name="submitdiag"
+		  value="Generate bill" />
+	</form>
+
+
+{% for d in data %}
+<p>
+<span>{{ d[0] }}</span><span>{{ d[1] }}</span><span>{{ d[2] }}</span><span>{{ d[3] }}</span><span>{{ d[4] }}</span><span>{{ d[9] }}</span><span>{{ d[10] }}</span><span>{{ d[12] }}</span>
+</p>
+{% endfor %}
+
+
+<div id = "acknowledge">ⒸBPHC hospital 2021</div>
+</body>
+</html>
