@@ -27,11 +27,14 @@
 
 
 <form method = "post">
-	<label for="patientid">Enter patient id:</label><br><br>
- <input type="text" id="patientid" name="patientbill" required pattern="^[\d]+$"><br><br>
-			<input type="submit" name="submitdiag"
-		  value="Generate bill" />
-	</form>
+	<div class="detail_container">
+		<br><br>
+		<div class="detail_text">Patient ID: </div>
+		<input type="text" id="patientid" name="patientbill" required pattern="^[\d]+$">
+		<br><br>
+		<input type="submit" name="submitdiag" value="Generate bill" />
+	</div>
+</form>
 
 
 {% for d in data %}
@@ -40,6 +43,9 @@
 </p>
 {% endfor %}
 
+<div class="button_container" style="color:#f5deb3;font-family:Brush Script MT">
+	<button type="menu" onclick="location.href='doctormain'" style="color:#f5deb3;font-family:Brush Script MT;border-radius:3em;" >Back</button>
+</div>
 
 <div id = "acknowledge">ⒸBPHC hospital 2021</div>
 </body>
